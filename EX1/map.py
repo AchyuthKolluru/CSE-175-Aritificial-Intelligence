@@ -11,6 +11,10 @@
 #
 
 
+from hashlib import new
+from turtle import st
+
+
 class RoadMap:
     """A road map contains locations on a Cartesian plane and directed
     connections between locations, called road segments, each with a
@@ -64,5 +68,43 @@ class RoadMap:
         # Zero should be returned if the given road sequence does not
         # form a valid path from the given starting location.
         # PLACE YOUR CODE HERE - REPLACING THE NEXT LINE!
-        return 0.0
+    
+        
+        current_location = start
+        previous_location = start
+        cost = 0
+    
+        for x in road_list:
+            all_streets = self.get_result(current_location)
+            #print(all_streets)
+            if x in all_streets:
+                #print(x)
+                previous_location = current_location
+                current_location = self.get_result(current_location, x)
+                cost += self.get(current_location, previous_location)
+            else:
+                return 0.0
+        
+        
+        return cost
+                
+                
+            
+            
+        
+        
+        
+        
+
+
+
+        
+        
+
+        
+        
+        
+        
+        
+        
 
