@@ -15,19 +15,21 @@
 from multiprocessing.spawn import is_forking
 from route import Node
 from route import Frontier
+from route import RouteProblem
 
 
-def uniform_cost_search(problem, repeat_check=False):
+def uniform_cost_search(problem: RouteProblem, repeat_check=False):
     """Perform uniform cost search to solve the given route finding
     problem, returning a solution node in the search tree, corresponding
     to the goal location, if a solution is found. Only perform repeated
     state checking if the provided boolean argument is true."""
 
     # PLACE YOUR CODE HERE
-
     solNode = Node(problem.start)
     arr = Frontier(solNode, sort_by='g')
-    visited = set(solNode)
+    visited = set()
+    visited.add(solNode)
+    print(solNode.expand(problem))
 
     if  problem.is_goal(solNode.loc):
         return solNode
@@ -42,6 +44,6 @@ def uniform_cost_search(problem, repeat_check=False):
                 visited.add(x)
                 if repeat_check == True:
                     arr.add(x)
-
+                
 
     return None

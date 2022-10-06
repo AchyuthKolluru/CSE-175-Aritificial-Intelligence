@@ -14,9 +14,10 @@
 
 from route import Node
 from route import Frontier
+from route import RouteProblem
 
 
-def a_star_search(problem, h, repeat_check=False):
+def a_star_search(problem: RouteProblem, h, repeat_check=False):
     """Perform A-Star search to solve the given route finding problem,
     returning a solution node in the search tree, corresponding to the goal
     location, if a solution is found. Only perform repeated state checking if
