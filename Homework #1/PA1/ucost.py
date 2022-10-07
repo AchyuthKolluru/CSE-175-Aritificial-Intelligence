@@ -29,21 +29,24 @@ def uniform_cost_search(problem: RouteProblem, repeat_check=False):
     arr = Frontier(solNode, sort_by='g')
     visited = set()
     visited.add(solNode)
-    print(solNode.expand(problem))
 
-    if  problem.is_goal(solNode.loc):
+    if problem.is_goal(solNode.loc):
         return solNode
-    while not arr.is_empty:
+    while not arr.is_empty():
         solNode = arr.pop()
         if problem.is_goal(solNode.loc):
             return solNode
         for x in solNode.expand(problem):
-            if not repeat_check:
-                arr.add(x)
-            if x not in visited:
-                visited.add(x)
-                if repeat_check == True:
+            if repeat_check:
+                if x in visited:
+                    if arr.contains(x) and x.value(sort_by='g') < arr.__getitem__(x):
+                        arr.__delitem__(x)
+                        arr.add(x)
+                else:
                     arr.add(x)
-                
+                    visited.add(x)
+            else:
+                arr.add(x)
+                visited.add(x)
 
     return None
