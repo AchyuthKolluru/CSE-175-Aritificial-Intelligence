@@ -24,5 +24,29 @@ def greedy_search(problem, h, repeat_check=False):
     state checking if the provided boolean argument is true."""
 
     # PLACE YOUR CODE HERE
+    solNode = Node(problem.start)
+    arr = Frontier(solNode, sort_by='h')
+    visited = set()
+    visited.add(solNode)
+
+    if problem.is_goal(solNode.loc):
+        return solNode
+    while not arr.is_empty():
+        solNode = arr.pop()
+        if problem.is_goal(solNode.loc):
+            return solNode
+        for x in solNode.expand(problem):
+            if repeat_check:
+                if x in visited:
+                    if arr.contains(x) and x.value(sort_by='g') < arr.__getitem__(x):
+                        arr.__delitem__(x)
+                        arr.add(x)
+                else:
+                    arr.add(x)
+                    visited.add(x)
+            else:
+                arr.add(x)
+                visited.add(x)
+
 
     return None

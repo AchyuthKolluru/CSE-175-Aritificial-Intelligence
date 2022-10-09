@@ -37,5 +37,7 @@ class HeuristicFunction:
             return value
         else:
             # PLACE YOUR CODE FOR CALCULATING value OF loc HERE
+            # An admissable heurisitic function can be determined through the euclidian distance to get an estimate.
+            
             return value
 
