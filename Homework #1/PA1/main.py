@@ -125,7 +125,7 @@ test_map = RoadMap(dict(
                         back_road='truck_stop',
                         overgrown_path='fast_food'),
         truck_stop=dict(back_road='car_dealer',
-                        highway_south='bookstore'),
+                        highway_south='bookstore'), 
         fast_food=dict(highway_north='bus_station',
                        highway_east='bookstore',
                        overgrown_path='car_dealer'),

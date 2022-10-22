@@ -26,8 +26,8 @@ class HeuristicFunction:
 
     def __init__(self, problem=None):
         self.problem = problem
+        
         # PLACE ANY INITIALIZATION CODE HERE
-
     def h_cost(self, loc=None):
         """An admissible heuristic function, estimating the cost from
         the specified location to the goal state of the problem."""
@@ -38,6 +38,22 @@ class HeuristicFunction:
         else:
             # PLACE YOUR CODE FOR CALCULATING value OF loc HERE
             # An admissable heurisitic function can be determined through the euclidian distance to get an estimate.
+            #gets the goal location of the problem
+            # goalLoc = self.problem.goal
             
+            all_streets = self.problem.actions(loc)
+            # print(all_streets)
+            speed = []
+            for roads in all_streets:
+                
+                places = self.problem.result(loc, roads)
+                time_cost = self.problem.action_cost(loc, places)
+                distance = self.problem.map.euclidean_distance(loc, places)
+                speed.append(distance/time_cost)
+            
+            
+            #figures out the euclidian value from 2 locations goalLoc and the value that is being passed in 
+            # print(self.problem.map.euclidean_distance(loc, goalLoc))
+            value = min(speed)
             return value
 

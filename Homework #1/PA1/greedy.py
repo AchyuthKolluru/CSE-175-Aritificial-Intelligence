@@ -24,7 +24,10 @@ def greedy_search(problem, h, repeat_check=False):
     state checking if the provided boolean argument is true."""
 
     # PLACE YOUR CODE HERE
-    solNode = Node(problem.start)
+    
+    #we want to pass in the h variable we have into the solNode as we want Node to be able to access the h cost funtion
+    #from here we pass in h_cost to be able to get the cost of the h function.
+    solNode = Node(problem.start, h_eval= h.h_cost(problem.start))
     arr = Frontier(solNode, sort_by='h')
     visited = set()
     visited.add(solNode)
@@ -35,16 +38,19 @@ def greedy_search(problem, h, repeat_check=False):
         solNode = arr.pop()
         if problem.is_goal(solNode.loc):
             return solNode
-        for x in solNode.expand(problem):
+        
+        for x in solNode.expand(problem, h):
             if repeat_check:
                 if x in visited:
-                    if arr.contains(x) and x.value(sort_by='g') < arr.__getitem__(x):
+                    if arr.contains(x) and x.value(sort_by='h') < arr.__getitem__(x):
                         arr.__delitem__(x)
                         arr.add(x)
                 else:
+                    # x.h_eval = h.h_cost(solNode.loc)
                     arr.add(x)
                     visited.add(x)
             else:
+                # x.h_eval = h.h_cost(solNode.loc)
                 arr.add(x)
                 visited.add(x)
 
