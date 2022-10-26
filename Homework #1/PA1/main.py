@@ -26,8 +26,8 @@ import greedy
 import astar
 
 
-start_location = 'home'
-goal_location = 'bookstore'
+start_location = 'ranch'
+goal_location = 'car_dealer'
 
 test_map = RoadMap(dict(
         # road segment costs
