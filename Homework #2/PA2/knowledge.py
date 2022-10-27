@@ -38,7 +38,7 @@
 #
 # PLACE ANY COMMENTS, INCLUDING ACKNOWLEDGMENTS, HERE
 #
-# PLACE YOUR NAME AND THE DATE HERE
+# Achyuth Kolluru, 10/27/2022
 #
 
 
@@ -87,4 +87,35 @@ crime_sentences = ['(American(x) & Weapon(y) & Sells(x, y, z) & Hostile(z)) ==> 
 
 # PLACE YOUR FOL SENTENCES IN THIS LIST
 
-monster_sentences = []
+monster_sentences = ['Vampire(Celene)', 'Werewolf(Mario)', 'Witch(Mildred)',
+                    'Person(Bob)', 'Person(Lin)', 'Person(Maurice)',
+                    'Dead(x) & Person(x) ==> Victim(x)',
+                    'Vampire(x) ==> Monster(x)', 'Werewolf(x) ==> Monster(x)', 'Witch(x) ==> Monster(x)',
+                    'Monster(x) & Present(x) ==> Suspect(x)',
+                    'Vampire(x) & Suspect(x) & Victim(x) & Bitten(x) ==> Killed(x, y)',
+                    'Werewolf(x) & Suspect(x) & Victim(x) & Eaten(x) ==> Killed(x, y)',
+                    'Witch(x) & Suspect(x) & Victim(x) & Poisoned(x) ==> Killed(x, y)',
+                    'Victim(x) & Drained(x) & Intact(x) ==> Bitten(x)',
+                    'Victim(x) & Drained(x) & Incomplete(x) ==> Eaten(x)',
+                    'Victim(x) & Intact(x) & Complexion(x, Blue) ==> Poisoned(x)',
+                    'Victim(x) & Intact(x) & Complexion(x, Green) ==> Poisoned(x)',
+                    'Victim(x) & Intact(x) & Complexion(x, Purple) ==> Poisoned(x)',
+                    'Victim(x) & Intact(x) & (Complexion(x, Pale) & Boils(x)) ==> Poisoned(x)',
+                    'Victim(x) & Complexion(x, Pale) & Punctured(x) ==> Drained(x)',
+                    'Victim(x) & Complexion(x, Pale) & Cold(x) ==> Drained(x)',
+                    'Victim(x) & Incomplete(x) ==> Disemboweled(x)',
+                    'Victim(x) & Incomplete(x) ==> Dismembered(x)']
+
+# monster_sentences = ['Vampire(Celene), Werewolf(Mario), Witch(Mildred)',
+#                     'Person(Bob), Person(Lin), Person(Maurice)',
+#                     'Dead(x) & Person(x) ==> Victim(x)',
+#                     'Vampire(x) ==> Monster(x), Werewolf(x) ==> Monster(x), Witch(x) ==> Monster(x)'
+#                     'Monster(x) & Present(x) ==> Suspect(x)'
+#                     '(Vampire(x) & Suspect(x)) & (Victim(x) & Bitten(x)) ==> Killed(x, y)'
+#                     '(Werewolf(x) & Suspect(x)) & (Victim(x) & Eaten(x)) ==> Killed(x, y)'
+#                     '(Witch(x) & Suspect(x)) & (Victim(x) & Poisoned(x)) ==> Killed(x, y)'
+#                     '(Victim(x) & Drained(x) & Intact(x)) ==> Victim(x) & Bitten(x)'
+#                     '(Victim(x) & Drained(x) & Incomplete(x)) ==> Victim(x) & Eaten(x)'
+#                     '(Victim(x) & Intact(x) & (Complexion(x, Blue) | Complexion(x, Green) | Complexion(x, Purple) | (Complexion(x, Pale) & Boils(x)))) ==> Victim(x) & Poisoned(x) '
+#                     '(Victim(x) & Complexion(x, Pale)) & (Cold(x) | Punctured(x)) ==> Victim(x) & Drained(x)'
+#                     '(Victim(x) & Intact(x)) ==> Disemboweled(x) & Dismembered(x)']
