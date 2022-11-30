@@ -21,7 +21,7 @@
 #
 # PLACE ANY COMMENTS, INCLUDING ACKNOWLEDGMENTS, HERE
 #
-# PLACE YOUR NAME AND THE DATE HERE
+# Achyuth Kolluru 11/29/2022
 #
 
 
@@ -35,12 +35,16 @@ def expected_value_over_delays(state, ply):
     Guardian delay times. Return this expected utility value."""
     val = 0.0
 
+    expected = 0
+    for i in range(2, 6):
+        expected += probability_of_time(i) * i
+
+    print(expected)
     # PLACE YOUR CODE HERE
     # Note that the value of "ply" must be passed along, without
     # modification, to any function calls that calculate the value 
     # of a state.
-
-    return val
+    return expected
 
 
 def heuristic_value(state):
@@ -49,7 +53,7 @@ def heuristic_value(state):
     be between the maximum payoff value and the additive inverse of the
     maximum payoff."""
     val = 0.0
-
+    
     # PLACE YOUR CODE HERE
 
     return val
