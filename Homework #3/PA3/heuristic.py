@@ -33,13 +33,10 @@ from minimax import value
 def expected_value_over_delays(state, ply):
     """Calculate the expected utility over all possible randomly selected
     Guardian delay times. Return this expected utility value."""
-    val = 0.0
-
     expected = 0
     for i in range(2, 6):
-        expected += probability_of_time(i) * i
-
-    print(expected)
+        state.time_remaining = i
+        expected += probability_of_time(i) * value(state, ply)
     # PLACE YOUR CODE HERE
     # Note that the value of "ply" must be passed along, without
     # modification, to any function calls that calculate the value 
@@ -53,7 +50,27 @@ def heuristic_value(state):
     be between the maximum payoff value and the additive inverse of the
     maximum payoff."""
     val = 0.0
-    
     # PLACE YOUR CODE HERE
-
+    
+    #First we want to check if it is the Computers turn or not
+    if state.current_turn == Player.west:
+        #Now we want to check if the computers score is lower than the players score
+        if state.e_loc <= state.w_loc:
+            #if it is then we want to play safe
+            val = max_payoff
+        else:
+            #if it isn't then we use the heuristic function
+            val = (state.e_loc + state.w_loc) * (max_payoff/(max_time_steps + 1))
+        val = val * -1
+    else:
+        if state.e_loc <= state.w_loc:
+            val = -max_payoff
+        else:
+            val = (state.e_loc + state.w_loc) * (max_payoff/(max_time_steps + 1))
+    #heuristic = (west_value + east_value) * (max_pay_off/(max_time_steps + 1))
+    
+    #Now we want to make sure that it is between the the inverse max payoff and the max_payof
+        
+    
+    val = max(min(val, max_payoff), -max_payoff)
     return val
