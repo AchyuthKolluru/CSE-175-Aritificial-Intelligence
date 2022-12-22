@@ -33,14 +33,15 @@ from minimax import value
 def expected_value_over_delays(state, ply):
     """Calculate the expected utility over all possible randomly selected
     Guardian delay times. Return this expected utility value."""
-    expected = 0
-    for i in range(2, 6):
+    expected = 0.0
+    #This will be in range from the min time step to max time step + 1
+    #because we want to get the probablities from all the possible scenarios
+    #We also need to add + 1 because when using the range function we do not 
+    #iterate over the last value, but rather use it as the one before it ends.
+    for i in range(min_time_steps, max_time_steps + 1):
+        #now we want to set the time_remainign to the iteratable value over all possible steps
         state.time_remaining = i
-        expected += expected + probability_of_time(i) * value(state, ply)
-    # PLACE YOUR CODE HERE
-    # Note that the value of "ply" must be passed along, without
-    # modification, to any function calls that calculate the value 
-    # of a state.
+        expected += (probability_of_time(i) * value(state, ply))
     return expected
 
 
@@ -52,22 +53,37 @@ def heuristic_value(state):
     val = 0.0
     # PLACE YOUR CODE HERE
     
-    #First we want to check if it is the Computers turn or not
-    if state.current_turn == Player.west:
-        #Now we want to check if the computers score is lower than the players score
-        if state.e_loc <= state.w_loc:
-            #if it is then we want to play safe
-            val = max_payoff
-        else:
-            #if it isn't then we use the heuristic function
-            val = (state.e_loc + state.w_loc) * (max_payoff/(max_time_steps + 1))
-        val *= -1
-    else:
-        if state.e_loc <= state.w_loc:
+    # #First we want to check if it is the Computers turn or not
+    # if state.current_turn == Player.west:
+    #     #Now we want to check if the computers score is lower than the players score
+    #     if state.e_loc <= state.w_loc:
+    #         #if it is then we want to play safe
+    #         val = max_payoff
+    #     else:
+    #         #if it isn't then we use the heuristic function
+    #         val = (state.e_loc + state.w_loc) * (max_payoff/(max_time_steps + 1))
+    #     val *= -1
+    # else:
+    #     if state.e_loc <= state.w_loc:
+    #         val = -max_payoff
+    #     else:
+    #         val = (state.e_loc + state.w_loc) * (max_payoff/(max_time_steps + 1))
+    # #heuristic = (west_value + east_value) * (max_pay_off/(max_time_steps + 1))
+    
+    
+    if(state.current_turn == Player.west):
+        if abs(state.w_loc) <= state.e_loc:
             val = -max_payoff
         else:
-            val = (state.e_loc + state.w_loc) * (max_payoff/(max_time_steps + 1))
-    #heuristic = (west_value + east_value) * (max_pay_off/(max_time_steps + 1))
+            val = (state.e_loc + state.w_loc) * (max_payoff/(max_act_steps))
+        val *= -1
+    else:
+        if abs(state.w_loc) <= state.e_loc:
+            val = -max_payoff
+        else:
+            val = (state.e_loc + state.w_loc) * (max_payoff/(max_act_steps))
+    
+    
     
     #Now we want to make sure that it is between the the inverse max payoff and the max_payof
     val = max(min(val, max_payoff), -max_payoff)
